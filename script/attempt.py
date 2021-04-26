@@ -1,7 +1,4 @@
-# import the necessary packages
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
-import argparse
 from script import utils
 import cv2
 
