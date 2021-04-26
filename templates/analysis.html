@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+{% if name.favorite %}
+<div>
+    <a href={{"/favorite_color/" + name.name + name.surname }} class="btn btn-dark">
+            Определить любимый цвет
+        </a>
+</div>
+{% endif %}
+{% for paint in art %}
+<h3>{{ paint[0].artist }}</h3>
+<a href={{ paint[0].link_on_paint }} target="_blank">
+    <img src={{ paint[0].link_on_paint }} alt={{ paint[0].artist }} loading="lazy" width="60%" style="margin-right:10px;">
+</a>
+<img src={{ paint[1] }} alt={{ paint[0].artist }} width="30%" style="margin-right:5px;">
+    <br>
+    <br>
+<br>
+{% endfor %}
+<h4 align="center">{{ message }}</h4>
+{% endblock %}

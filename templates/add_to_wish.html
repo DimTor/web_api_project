@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert alert-primary" role="alert" style="font-size:25px;" align="center">
+    {{ message }}
+</div>
+<a href={{ paint.link_on_paint }} target="_blank">
+    <img src={{ paint.link_on_paint }} alt={{ paint.artist }} loading="lazy" width="70%" style="margin-right:50px;"></a>
+{% if art %}
+<div class="alert alert-primary" role="alert" style="font-size:25px; margin-top:25px;" align="center">
+    Вам также может понравиться
+</div>
+{% endif %}
+{% for paints in art %}
+<div class="paintings" style="margin-top:50px;">
+    <h3>{{ paint.artist }}</h3>
+    <a href={{ paints.link_on_paint }} target="_blank">
+    <img src={{ paints.link_on_paint }} alt={{ paints.artist }} loading="lazy" width="70%" style="margin-right:50px;"></a>
+   <form action={{'/add/' + paints.unique_number}} method="post"> <input type="submit" class="btn btn-dark" value="В избранное"></form>
+    <a href={{ paints.link_on_web }} class="btn btn-dark" style="width:34%;margin-top:20px;" target="_blank"> Узнать больше </a>
+    <br>
+    <br>
+    <br>
+</div>
+{% endfor %}
+{% endblock %}

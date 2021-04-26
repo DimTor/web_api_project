@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for paint in art %}
+<div class="paintings" style="margin-top:50px;">
+    <h3>{{ paint.artist }}</h3>
+    <a href={{ paint.link_on_paint }} target="_blank">
+    <img src={{ paint.link_on_paint }} alt={{ paint.artist }} loading="lazy" width="70%" style="margin-right:50px;"></a>
+    {% if current_user.is_authenticated %}
+   <form action={{'/add/' + paint.unique_number}} method="post">
+       <input type="submit" class="btn btn-dark" value="В избранное">
+   </form>
+    {% endif %}
+    <a href={{ paint.link_on_web }} class="btn btn-dark" style="width:34%;margin-top:20px;" target="_blank"> Узнать больше </a>
+    <br>
+    <br>
+    <br>
+</div>
+{% endfor %}
+{% endblock %}

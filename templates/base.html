@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <link rel="icon" href="data:;base64,=">
+    <title>Masterpiece</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <h1><a href="/" id="title" style="text-decoration:none;color:black">ArtGallery</a></h1>
+        {% if current_user.is_authenticated %}
+        {% if current_user.avatar %}
+        <img src={{'../static/avatars/' + current_user.avatar}} height="40px">
+        {% endif %}
+        <a class="navbar-brand" href={{'/page/' + current_user.name + current_user.surname }}>{{ current_user.name }} {{ current_user.surname }}</a>
+        <a class="btn btn-warning" href="/logout">Выйти</a>
+        {% else %}
+        <p>
+            <a class="btn btn-primary " href="/register">Register</a>
+            <a class="btn btn-success" href="/login">Log in</a>
+        </p>
+        {% endif %}
+    </nav>
+            <div class="dropdown">
+  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    ...
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      {% if current_user.is_authenticated %}
+    <li><a class="dropdown-item" href="/list">Сходить в гости</a></li>
+    <li><a class="dropdown-item" href="/top">Рейтинги</a></li>
+      {% endif %}
+      <li><a class="dropdown-item" href="/">Галерея</a></li>
+      {% if current_user.is_authenticated %}
+      <li><a class="dropdown-item" href="/paints">Добавить картину</a></li>
+     <li><a class="dropdown-item" href={{'/page/' + current_user.name + current_user.surname }}>Моя страница</a></li>
+      {% endif %}
+  </ul>
+</div>
+    <div align="right"><a href="/search" class="btn btn-warning">
+            &#128270;
+        </a></div>
+</header>
+<!-- Begin page content -->
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

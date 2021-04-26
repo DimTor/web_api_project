@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+{% if current_user.surname + ' ' + current_user.name == name.surname + ' ' + name.name %}
+<div class="alert alert-primary" role="alert" style="font-size:25px;" align="center">
+    Избранное
+</div>
+<div>
+    <a href={{"/analytics/" + name.name + name.surname }} class="btn btn-dark">
+            Анализ страницы
+        </a>
+</div>
+<br>
+<div>
+    <a href="/change_avatar" class="btn btn-dark">
+        {% if current_user.avatar %}
+        Сменить фотографию
+        {% else %}
+        Поставить фотографию
+        {% endif %}
+        </a>
+</div>
+
+{% else %}
+<div class="alert alert-primary" role="alert" style="font-size:25px;" align="center">
+    {{ name.surname + ' ' + name.name  }}
+</div>
+<div>
+    <a href={{"/analytics/" + name.name + name.surname }} class="btn btn-dark">
+            Анализ страницы
+        </a>
+</div>
+{% endif %}
+{% for paint in art %}
+<h3>{{ paint.artist }}</h3>
+<a href={{ paint.link_on_paint }} target="_blank">
+    <img src={{ paint.link_on_paint }} alt={{ paint.artist }} loading="lazy" width="70%" style="margin-right:50px;">
+</a>
+{% if current_user.is_authenticated and current_user.surname + ' ' + current_user.name == name.surname + ' ' + name.name %}
+   <form action={{'/delete/' + paint.unique_number}} method="post">
+       <input type="submit" class="btn btn-dark" value="Удалить из избранного">
+   </form>
+{% elif not current_user.favorite or (paint.unique_number not in current_user.favorite and paint.unique_number != current_user.favorite) %}
+   <form action={{'/add_from/' + paint.unique_number + name.name + name.surname}} method="post">
+       <input type="submit" class="btn btn-dark" value="В свою коллекцию">
+   </form>
+{% else %}
+<a href={{ paint.link_on_paint }}><input type="submit" class="btn btn-dark" value="Уже в избранном"></a>
+{% endif %}
+    <a href={{ paint.link_on_web }} class="btn btn-dark" style="width:34%;margin-top:20px;" target="_blank"> Узнать больше </a>
+    <br>
+    <br>
+<br>
+{% endfor %}
+<h4 align="center">{{ message }}</h4>
+{% endblock %}

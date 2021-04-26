@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<h2 align="center">Рейтинг художников</h2>
+{% if current_user.is_authenticated %}
+<div>
+    <a href="/top" class="btn btn-dark">
+            Рейтинг пользователей
+        </a>
+</div>
+{% endif %}
+<br>
+<h3>Рейтинг самых популярных пользователей</h3>
+{% for artist in artists %}
+<div class="table_container">
+    <table class="my_table">
+        <tr class="my_row">
+            <td class="title" width="400px" bgcolor="#dddddd">Name</td>
+            <td class="title" width="150px" bgcolor="#dddddd" align="center">Works liked by other users</td>
+            <td class="title" width="150px" bgcolor="#dddddd">Place in the rating</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary" bgcolor="#eeeeff">
+                <a href={{artist[2]}} style="text-decoration:none;color:black">{{ artist[0] }}</a>
+            </td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ artist[1] }}</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ loop.index }}</td>
+        </tr>
+
+    </table>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}

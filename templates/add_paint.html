@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Добавление картины</h1>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(class="form-control") }}<br>
+        {% for error in form.title.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.artist.label }}<br>
+        {{ form.artist(class="form-control") }}<br>
+        {% for error in form.artist.errors %}
+            <p content="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+        <p>
+        {{ form.link_on_info.label }}<br>
+        {{ form.link_on_info(class="form-control") }}<br>
+        {% for error in form.link_on_info.errors %}
+            <p content="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.link_on_paint.label }}<br>
+        {{ form.link_on_paint(class="form-control") }}<br>
+        {% for error in form.link_on_paint.errors %}
+            <p content="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+<h4>{{ messag }}</h4>
+{% endblock %}

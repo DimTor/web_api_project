@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> {{message}} </h1>
+<form action="" method="post">
+<label for="exampleDataList" class="form-label">Поиск</label>
+<input class="form-control" list="datalistOptions" id="exampleDataList" name="search" placeholder="Type to search...">
+<datalist id="datalistOptions">
+    {% for artist in artists %}
+      <option value="{{artist.name}}">
+    {% endfor %}
+  {% for paint in paints %}
+  {% if paint.name %}
+  <option value="{{paint.name}}">
+    {% endif %}
+  {% endfor %}
+</datalist>
+<button type="submit" class="btn btn-light" id="homeSubmit">Искать</button>
+</form>
+{% endblock %}

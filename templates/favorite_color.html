@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+{% if name.favorite %}
+<h1> Ваши любимые цвета </h1>
+
+<div>
+    <a href={{"/analytics/" + name.name + name.surname }} class="btn btn-dark">
+            Назад
+        </a>
+</div>
+{% endif %}
+<img src={{ paint }} alt="favorite_color" }} width="60%" style="margin-right:5px;">
+<h4 align="center">{{ message }}</h4>
+{% endblock %}

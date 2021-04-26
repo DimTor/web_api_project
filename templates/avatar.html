@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if not success %}
+{% if file %}
+<h3>Текущая фотография</h3>
+<img src={{ file }} alt="Ваш аватар" width="50%">
+<h1 align="center"> Сменить аватар </h1>
+{% else %}
+<h1> Установить аватар </h1>
+{% endif %}
+</div>
+    <form method="post" enctype="multipart/form-data">
+                               <div class="form-group">
+                                    <label for="photo">Выбрать</label>
+                                    <input type="file" class="form-control-file" id="photo" name="file" accept="image/aces">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
+{% else %}
+<h1> Аватар успешно сохранен </h1>
+    <a href={{'/page/' + current_user.name + current_user.surname }} class="btn btn-dark" style="width:30%">
+            Ок
+        </a>
+ <a href="/change_avatar" class="btn btn-dark">
+        Сменить фотографию
+        </a>
+{% endif %}
+
+{% endblock %}

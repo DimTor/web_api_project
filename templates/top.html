@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<h2 align="center">Рейтинг пользователей</h2>
+{% if current_user.is_authenticated %}
+<div>
+    <a href="/top_of_artist" class="btn btn-dark">
+            Рейтинг художников
+        </a>
+</div>
+{% endif %}
+<br>
+<h3>Рейтинг самых популярных пользователей</h3>
+{% for user in users %}
+<div class="table_container">
+    <table class="my_table">
+        <tr class="my_row">
+            <td class="title" width="400px" bgcolor="#dddddd" align="center">Name</td>
+            <td class="title" width="150px" bgcolor="#dddddd" align="center">Images liked by other</td>
+            <td class="title" width="150px" bgcolor="#dddddd" align="center">Place in the rating</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary" bgcolor="#eeeeff"><a href={{'/page/' + us[loop.index - 1].name + us[loop.index - 1].surname }} style="text-decoration:none;color:black">
+                {{ user[0] }}</a></td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ user[1] }}</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ loop.index }}</td>
+        </tr>
+
+    </table>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}

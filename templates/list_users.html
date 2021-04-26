@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for user in users %}
+<h3><a href={{'/page/' + user.name + user.surname }}>{{user.surname}} {{user.name}}</a>
+{% if user.avatar %}
+<img src={{"../static/avatars/" + user.avatar}} alt="Avatar" style="border-radius: 50%; height:40px; width:40px" align="middle">
+{% endif %}
+    </h3>
+{% endfor %}
+
+{% endblock %}
